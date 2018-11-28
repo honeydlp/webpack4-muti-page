@@ -26,6 +26,13 @@ let htmpConf = function (extendChunks = []) {
         filename: pathname + '.html',
         template: `./src/${pathname}.html`,
         chunksSortMode: 'manual',
+        minify:{
+					collapseInlineTagWhitespace: true,
+					collapseInlineTagWhitespace: true,
+					collapseWhitespace: true,
+					minifyCSS: true,
+					minifyJS: true,
+				},
         meta: {
           'Content-Type': { 'http-equiv': 'Content-Type', 'content': 'text/html;charset=UTF-8' },
           'expires': { 'http-equiv': 'expires', 'content': '0' },
