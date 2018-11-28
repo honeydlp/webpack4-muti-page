@@ -1,0 +1,21 @@
+body {
+  padding: 20px 10px;
+  background-color: #24292e;
+}
+p {
+  margin: 0;
+  overflow: hidden;
+}
+a {
+  float: left;
+  padding: 3px;
+  font-size: 0.2rem;
+  color: #fff;
+  text-decoration: none;
+}
+a:hover {
+  color: hsla(0,0%,100%,.75);
+}
+a:active {
+  color: hsla(0,0%,100%,.75);
+}

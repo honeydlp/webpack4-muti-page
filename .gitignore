@@ -6,4 +6,7 @@ debug.log
 npm-debug.log
 app
 rev
+config/proxy.config.js
+mock/*
+!/mock/method.js
 package-lock.json

@@ -1,17 +1,25 @@
-const proxy = ['/h5', '/system']
+const proxy = ['/system']
 
 const config = {
-	qa: {
-		baseUrl: 'http://www.baidu.com/',
-		cookie: '11'
-	},
-	dev: {
-		baseUrl: '',
-		cookie: ''
-	}
+  qa1: {
+    baseUrl: '',
+    cookie: ''
+  },
+  qa2: {
+    baseUrl: '',
+    cookie: ''
+  },
+  qa3: {
+    baseUrl: '',
+    cookie: ''
+  },
+  dev: {
+    baseUrl: '',
+    cookie: ''
+  }
 }
 
-module.exports ={
-	proxy: proxy,
-	config: config
+module.exports = {
+  proxy: proxy,
+  config: config
 }

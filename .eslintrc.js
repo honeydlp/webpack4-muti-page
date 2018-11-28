@@ -1,47 +1,40 @@
 module.exports ={
-  env: {
+    "parser": "babel-eslint",
+    "env": {
       browser: true,
       es6: true,
       jquery: true
-  },
-  "parserOptions": {
+    },
+    "parserOptions": {
       "ecmaVersion": 6,
       "sourceType": "module"
-  },
-  "globals":{
+    },
+    "extends": "standard",
+    "globals":{
       $: true,
-      util: true,
-      iScroll: true,
-      Swiper: true
-  },
-  "rules": {
-      "linebreak-style":[
-          "warn",
-          "windows"
-      ],
+      lottie: true,
+      IS_MOCK: true,
+      INDEX_LIST: true
+    },
+    "rules": {
       "semi": [
-          "error",
-          "never"
+        "error",
+        "never"
       ],
       "padded-blocks":[0, "never"],
       "max-len": "off",
       "comma-dangle": "off",
-      "require-jsdoc": [2, {
-          require: {
-              FunctionDeclaration: true,
-              MethodDefinition: true,
-              ClassDeclaration: true,
-          },
-      }],
       "space-before-function-paren": [2, {
-          asyncArrow: "always",
-          anonymous: "always",
-          named: "never",
+        asyncArrow: "always",
+        anonymous: "always",
+        named: "never",
       }],
       "one-var": "off",
       "no-use-before-define": "warn",
       "no-return-assign": "warn",
       "no-unused-vars": "warn",
-      "no-empty-pattern": "warn"
+      "no-empty-pattern": "warn",
+      "no-new": 0
+    }
   }
-}
+  

@@ -4,12 +4,10 @@
        根据编译环境，定义页面需用到的变量在 webpack.plguins.js DefinePlugin
     代理配置在config/proxy.config.js 
     mock数据在mock/index.js 可在打包脚本增加IS_MOCK=true开启
-## mock服务 参照跟目录mock.js文档。
-
-    Mock.mock(/system\/adminUser\/list/, function(options) {
+## mock服务 参照mock.js文档。
+    Mock.mock(/system\/adminUser, function(options) {
 
     })
-
     /**
          * 参数解析
          * rurl, [rtype],[function( options )]
@@ -24,23 +22,17 @@
         * url    ajax请求url
         * type   ajax请求方法
         * body   ajax请求方法如果是post,值在body里
-        * {
-              "url": "/system/adminUser/list/?foo=1&bar=2&faz=3",
+        * 
+          {
+              "url": "/system/adminUser",
               "type": "GET",
               "body": null
-          }
-          {
-              "url": "/system/adminUser/list/",
-              "type": "GET",
-              "body": null
-          }
-          {
-              "url": "/system/adminUser/list/",
-              "type": "POST",
-              "body": "foo=1&bar=2&faz=3"
           }
     */  
 ### 新增eslint配置，遵循标准代码编写配置，与其不一致的配置详见.eslintrc.js
       eslint src //扫描src目录下的.js文件
       eslint --ext .js,.vue src // 扫描src下的.js与.vue后缀文件（默认只扫描.js文件）
       eslint --fix src // 修正src下面的.js文件格式错误（会自动调整文件）
+### 新增git提交规范化
+      git commit 替换为 git cz 具体使用参照commitizen插件使用
+### 新增eslint代码编写规范，详细配置在.eslintrc.js
