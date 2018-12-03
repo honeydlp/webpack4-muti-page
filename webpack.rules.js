@@ -28,6 +28,19 @@ module.exports = [
     exclude: '/node_modules/'
   },
   {
+    test: /\.(ts)$/,
+    use: [
+      'ts-loader',
+      {
+        loader: 'eslint-loader',
+        options: {
+          formatter: require('eslint-friendly-formatter') // 默认的错误提示方式
+        }
+      }
+    ],
+    exclude: '/node_modules/'
+  },
+  {
     test: /\.(woff|woff2|eot|ttf|otf)$/,
     use: [{
       loader: 'file-loader',

@@ -15,8 +15,6 @@
          * rtype      可选参数，指定请求类型。不写get,post都匹配
          * function   记录用于生成响应数据的函数。当拦截到匹配 rurl 和 rtype 的 Ajax 请求时，函数 function(options) 将被执行，并把执行结果作为响应数据返回。
     */
-
-
     /**
         * options参数解析
         * url    ajax请求url
@@ -36,3 +34,5 @@
 ### 新增git提交规范化
       git commit 替换为 git cz 具体使用参照commitizen插件使用
 ### 新增eslint代码编写规范，详细配置在.eslintrc.js
+
+### webpack4 指定mode 不需要额外增加source-map配置，增加typescript处理

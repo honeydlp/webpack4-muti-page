@@ -6,7 +6,7 @@ const entrys = require('./config/entrys.js')
 let getAppEntry = function () {
   let entryObj = {}
   entrys.forEach(item => {
-    entryObj[item] = path.resolve(__dirname, 'src/js', item + '.js')
+    entryObj[item] = path.resolve(__dirname, 'src/js', item )
   })
   return entryObj
 }
@@ -45,6 +45,7 @@ let config = {
     // }
   },
   resolve: {
+    extensions: ['.ts', '.tsx', '.js'],
     alias: {
       utils: path.resolve(__dirname, './src', 'utils'),
       styles: path.resolve(__dirname, './src', 'styles'),
