@@ -19,3 +19,7 @@ a:hover {
 a:active {
   color: hsla(0,0%,100%,.75);
 }
+/* 测试purecss */
+.un-use {
+  background: #f00;
+}

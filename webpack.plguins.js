@@ -1,6 +1,6 @@
 const webpack = require('webpack')
 const path = require('path')
-const glob = require('glob')
+const glob = require('glob-all')
 // 消除冗余的css
 const PurifyCssWebpack = require('purifycss-webpack')
 // html模板
@@ -15,7 +15,7 @@ const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 // 处理src下面.html文件名字
 const entrys = require('./config/entrys.js')
-
+const devMode = process.env.NODE_ENV !== 'production'
 // 自动生成html模板
 let htmpConf = function (extendChunks = []) {
   let htmlArr = []
@@ -26,13 +26,12 @@ let htmpConf = function (extendChunks = []) {
         filename: pathname + '.html',
         template: `./src/${pathname}.html`,
         chunksSortMode: 'manual',
-        minify:{
-					collapseInlineTagWhitespace: true,
-					collapseInlineTagWhitespace: true,
-					collapseWhitespace: true,
-					minifyCSS: true,
-					minifyJS: true,
-				},
+        minify: {
+          collapseInlineTagWhitespace: true,
+          collapseWhitespace: true,
+          minifyCSS: true,
+          minifyJS: true,
+        },
         meta: {
           'Content-Type': { 'http-equiv': 'Content-Type', 'content': 'text/html;charset=UTF-8' },
           'expires': { 'http-equiv': 'expires', 'content': '0' },
@@ -52,8 +51,6 @@ let htmpConf = function (extendChunks = []) {
   return htmlArr
 }
 
-const devMode = process.env.NODE_ENV !== 'production'
-
 let pluginsConfig = [
   new CopyWebpackPlugin([{
     from: 'src/assets',
@@ -71,7 +68,10 @@ let pluginsConfig = [
   // 消除冗余的css代码
   new PurifyCssWebpack({
     // glob为扫描模块，使用其同步方法（请谨慎使用异步方法）
-    paths: glob.sync(path.join(__dirname, 'src/*.html'))
+    paths: glob.sync([
+      path.join(__dirname, 'src/*.html'),
+      path.join(__dirname, 'src/js/*.js')
+    ])
   }),
   // 全局暴露统一入口
   new webpack.ProvidePlugin({
