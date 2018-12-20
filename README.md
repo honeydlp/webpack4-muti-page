@@ -36,3 +36,5 @@
 ### 新增eslint代码编写规范，详细配置在.eslintrc.js
 
 ### webpack4 指定mode 不需要额外增加source-map配置，增加typescript处理
+
+### npm i --production 如果生产环境，只需装生产包，开发和生产用到的包做了区分
