@@ -15,8 +15,8 @@ module.exports = [
     ]
   },
   {
-    test: /\.js$/,
-    use: [
+    test: /\.(js)$/,
+    use: devMode ? [
       'babel-loader',
       {
         loader: 'eslint-loader',
@@ -24,12 +24,12 @@ module.exports = [
           formatter: require('eslint-friendly-formatter') // 默认的错误提示方式
         }
       }
-    ],
+    ] : ['babel-loader'],
     exclude: '/node_modules/'
   },
   {
     test: /\.(ts)$/,
-    use: [
+    use: devMode ? [
       'ts-loader',
       {
         loader: 'eslint-loader',
@@ -37,7 +37,7 @@ module.exports = [
           formatter: require('eslint-friendly-formatter') // 默认的错误提示方式
         }
       }
-    ],
+    ] : ['ts-loader'],
     exclude: '/node_modules/'
   },
   {

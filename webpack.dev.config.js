@@ -1,28 +1,16 @@
 const path = require('path')
 const pluginsConfig = require('./webpack.plguins.js')
 const rulesConfig = require('./webpack.rules.js')
-const entrys = require('./config/entrysTool.js')
+const webpackConf = require('./config/config.js')
 
-let getAppEntry = function () {
-  let entryObj = {}
-  entrys.forEach(item => {
-    entryObj[item] = path.resolve(__dirname, 'src/js', item)
-  })
-  return entryObj
-}
-
-const devMode = process.env.NODE_ENV !== 'production'
 let config = {
-  entry: {
-    // 多入口文件
-    ...getAppEntry(),
-    rem: path.resolve(__dirname, 'src/utils/rem.js')
-  },
+  devtool:  '#cheap-module-eval-source-map' ,
+  entry: () => new Promise((resolve) => resolve(webpackConf.webpackEntrys())),
   output: {
     path: path.resolve(__dirname, 'app'),
     // 打包多出口文件
-    filename: './js/[name].[chunkhash:8].js',
-    chunkFilename: './chunk/[name].[chunkhash:8].js'
+    filename: './js/[name].js',
+    chunkFilename: './chunk/[name].js'
   },
   plugins: pluginsConfig,
   module: {
@@ -37,7 +25,7 @@ let config = {
       lib: path.resolve(__dirname, './src', 'lib')
     }
   },
-  mode: 'production'
+  mode: 'development'
 }
 
 module.exports = config

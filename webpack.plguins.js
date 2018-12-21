@@ -14,14 +14,25 @@ const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 // 静态资源输出
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 // 处理src下面.html文件名字
-const entrys = require('./config/entrys.js')
+let entrys = require('./config/entrysTool.js')
+
 const devMode = process.env.NODE_ENV !== 'production'
+
+if(devMode) {
+  const selfConf = require('./config/self.config.js')
+  let entry = selfConf.entry
+  if(entry !== "") {
+    entrys = [entry]
+  }
+}
+
 // 自动生成html模板
 let htmpConf = function (extendChunks = []) {
   let htmlArr = []
   entrys.forEach(pathname => {
     htmlArr.push(
       new HtmlWebpackPlugin({
+        hash: true,
         chunks: extendChunks.concat([pathname]),
         filename: pathname + '.html',
         template: `./src/${pathname}.html`,
@@ -60,22 +71,8 @@ let pluginsConfig = [
     from: 'src/lib',
     to: './lib'
   }]),
-  // 分离css插件参数为提取出去的路径
-  new MiniCssExtractPlugin({
-    filename: devMode ? 'css/[name].css' : 'css/[name].[contenthash:8].css',
-    chunkFilename: devMode ? 'css/[id].css' : 'css/[id].[contenthash:8].css',
-  }),
-  // 消除冗余的css代码
-  new PurifyCssWebpack({
-    // glob为扫描模块，使用其同步方法（请谨慎使用异步方法）
-    paths: glob.sync([
-      path.join(__dirname, 'src/*.html'),
-      path.join(__dirname, 'src/js/*.js')
-    ])
-  }),
   // 全局暴露统一入口
   new webpack.ProvidePlugin({
-    // $: "jquery",
     // zepto: "zepto"
   })
 ]
@@ -95,6 +92,20 @@ if (devMode) {
   )
 } else {
   pluginsConfig.push(
+    // 分离css插件参数为提取出去的路径
+    new MiniCssExtractPlugin({
+      filename: 'css/[name].[contenthash:8].css',
+      chunkFilename: 'css/[id].[contenthash:8].css',
+    }),
+    // 消除冗余的css代码
+    new PurifyCssWebpack({
+      // glob为扫描模块，使用其同步方法（请谨慎使用异步方法）
+      paths: glob.sync([
+        path.join(__dirname, 'src/*.html'),
+        path.join(__dirname, 'src/js/*.js'),
+        path.join(__dirname, 'src/js/common/*.js')
+      ])
+    }),
     new CleanWebpackPlugin(['app']),
     new OptimizeCssAssetsPlugin(),
     ...htmpConf(['rem'])

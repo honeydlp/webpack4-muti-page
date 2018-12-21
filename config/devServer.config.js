@@ -1,6 +1,5 @@
 const path = require('path')
-// const config = require('../webpack.config')
-const proxyConfig = require('./proxy.config')
+const proxyConfig = require('./config')
 const PROXY_ENV = process.env.PROXY_ENV
 
 const devServer = {
